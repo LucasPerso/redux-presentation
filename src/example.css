@@ -1,0 +1,28 @@
+@import '~evaneos-react-components/stylesheets/colors.css';
+
+button {
+    font-size: 24px;
+    border-radius: 10px;
+    background-color: var(--colgate) !important;
+    padding: 20px;
+    margin: 20px;
+}
+
+.red {
+    color: var(--red);
+}
+
+.blue {
+    color: var(--blue);
+}
+
+.cats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.cats img {
+    max-height: 200px;
+    margin-bottom: 20px;
+}

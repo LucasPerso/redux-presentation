@@ -1,0 +1,107 @@
+@import '~evaneos-react-components/stylesheets/colors.css';
+@import '~evaneos-react-components/stylesheets/fonts.css';
+
+ul {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+li {
+    list-style: none;
+}
+
+.presentationContainer {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+
+.slideContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.slideContainer .titleContainer {
+    flex-grow: 0;
+    flex-basis: 10%;
+    margin: 0;
+    background-color: var(--veraneos);
+    width: calc(100% - 20px);
+}
+
+.slideContainer .contentContainer {
+    flex-grow: 1;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.titleContainer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 40px;
+    color: var(--colgate);
+    padding-left: 20px;
+}
+
+.titleContainer * {
+    align-self: center;
+}
+
+.contentContainer {
+    font-family: var(--sans-serif);
+    font-size: 40px;
+    text-align: center;
+    height: 100%;
+}
+
+.logo {
+    width: 40px;
+    margin-right: 20px;
+}
+
+.logo > g path {
+    fill: var(--colgate);
+}
+
+.sideBySide {
+    display: flex;
+    justify-content: space-around;
+    margin: 0 20px;
+    width: 100%;
+}
+
+.sideBySide > * {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-basis: 50%;
+}
+
+.img {
+    max-width: 600px;
+}
+
+.code {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    max-width: 2000px;
+    white-space: pre-wrap !important;
+    text-align: left;
+    padding: 20px;
+    font-size: 35px;
+}
+
+.codeSmall {
+    margin: 5px 0;
+    font-size: 25px;
+}
