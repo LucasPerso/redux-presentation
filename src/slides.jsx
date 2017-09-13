@@ -20,19 +20,9 @@ import Code from './components/Code';
 export default withStyles(s)([
     {
         content: (
-            <Title size="display">Redux & friends</Title>
-        )
-    },
-    {
-        title: 'Sommaire',
-        content: (
             <div>
-                <p>1. Redux in a nutshell</p>
-                <p>2. Smart vs Dumb</p>
-                <p>3. Data Flow</p>
-                <p>4. Middleware</p>
-                <p>5. Side Effects</p>
-                <p>6. Time-Travel Debugging with Redux DevTools</p>
+                <Title size="display">Redux & friends*</Title>
+                <Title size="subsection">*Might contains some crunchy bits of React</Title>
             </div>
         )
     },
@@ -63,15 +53,15 @@ export default withStyles(s)([
         title: 'Redux in a nutshell - some usages',
         content: (
             <div>
-                <Title style={{ marginBottom: '20px' }} size="page">Persist state to a local storage</Title>
-                <Title style={{ marginBottom: '20px' }} size="page">Pre-fill state on the server</Title>
-                <Title style={{ marginBottom: '20px' }} size="page">Take a state snapshot, to automated bug reports and ease bug reproductibility</Title>
+                <Title style={{ marginBottom: '20px' }} size="page">Persist state to a local storage (no useless API call)</Title>
+                <Title style={{ marginBottom: '20px' }} size="page">Pre-fill state on the server (i.e SEO)</Title>
+                <Title style={{ marginBottom: '20px' }} size="page">Take a state snapshot of user actions (bug reproductibility) </Title>
                 <p>...</p>
             </div>
         )
     },
     {
-        title: 'Redux in a nutshell - From MVC to RVA',
+        title: 'Redux in a nutshell',
         content: (
             <img style={{ height: '80%' }} src={reduxSimple} />
         ),
@@ -86,7 +76,7 @@ export default withStyles(s)([
  balance,
  depositAction,
  withdrawAction,
-}) => {
+}) => (
   <div>
       <button onClick={depositAction}>
           deposit
@@ -96,7 +86,7 @@ export default withStyles(s)([
       </button>
       <div>Balance: {balance}</div>
   </div>
-}`}
+)`}
                     </Code>
                 </div>
                 <div>
@@ -155,8 +145,8 @@ export default withStyles(s)([
             <div className={s.sideBySide}>
                 <div>
                     <p>Holds application state</p>
-                    <p>Allow access to state with <i>getState()</i> function</p>
-                    <p>Allow state to be updated via <i>dispatch()</i> actions</p>
+                    <p>Allow access to state with <i>store.getState()</i> function</p>
+                    <p>Allow state to be updated via <i>store.dispatch()</i> actions</p>
                 </div>
                 <div>
                     <img className={s.img} src={reduxStore}/>
@@ -164,30 +154,33 @@ export default withStyles(s)([
             </div>
         ),
     },
+//     {
+//         title: 'Redux in a nutshell - Connecting the state and the view',
+//         content: (
+//             <div>
+//                 <Title size="page">React-Redux</Title>
+//                 <Code>
+//                     {`connect(mapStateToProps, mapDispatchToProps)(Account)`}
+//                 </Code>
+//                 <Code>
+//                     {`function mapStateToProps(state, ownProps) {
+//   return { balance: state.balance  }
+// }
+//
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     depositAction: () => dispatch(deposit()),
+//   }
+// }`}
+//                 </Code>
+//             </div>
+//         )
+//     },
     {
-        title: 'Redux in a nutshell - Connecting the state and the view',
-        content: (
-            <div>
-                <Title size="page">React-Redux</Title>
-                <Code>
-                    {`connect(mapStateToProps, mapDispatchToProps)(Account)`}
-                </Code>
-                <Code>
-                    {`function mapStateToProps(state, ownProps) {
-  return { balance: state.account }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    depositAction: () => dispatch(deposit()),
-  }
-}`}
-                </Code>
-            </div>
-        )
-    },
-    {
-        content: <Title size="display">Smart vs Dumb</Title>
+        content: (<div>
+            <Title size="display">Smart vs Dumb</Title>
+            <Title size="section">Separation of concern FTW !</Title>
+        </div>)
     },
     {
         title: 'Smart vs Dumb',
@@ -229,13 +222,18 @@ function mapDispatchToProps(dispatch) {
             <div>
                 <div className={s.sideBySide}>
                     <Code>
-                        {`const mapStateToProps = (state, ownProps) => ({ balance: state.account});
+                        {`const mapStateToProps = (state, ownProps) => ({ balance: state.balance });
 
 const mapDispatchToProps = (dispatch) => ({
-    depositAction: () => dispatch(deposit()),
-    withdrawAction: () => dispatch(withdraw())
+    depositAction: () => dispatch({
+        type: 'DEPOSIT',
+        value: 10,
+    }),
+    withdrawAction: () => dispatch({
+        type: 'WITHDRAW',
+        value: 10,
+    })
 });
-
 export default connect(mapStateToProps, mapDispatchToProps)(Account);`}
                     </Code>
                     <div>
@@ -282,11 +280,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(Account);`}
                 <div>
                     <Title>Smart container</Title>
                     <Code className={s.codeSmall}>
-                        {`const mapStateToProps = (state, ownProps) => ({ balance: state.account});
+                        {`const mapStateToProps = (state, ownProps) => ({ balance: state.balance });
 
 const mapDispatchToProps = (dispatch) => ({
-    depositAction: () => dispatch(deposit()),
-    withdrawAction: () => dispatch(withdraw())
+    depositAction: () => dispatch({
+        type: 'DEPOSIT',
+        value: 10,
+    }),
+    withdrawAction: () => dispatch({
+        type: 'WITHDRAW',
+        value: 10,
+    })
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Account);`}
@@ -302,11 +306,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(Account);`}
                 <div>
                     <Title>Smart container</Title>
                     <Code className={s.codeSmall}>
-                        {`const mapStateToProps = (state, ownProps) => ({ balance: state.account});
+                        {`const mapStateToProps = (state, ownProps) => ({ balance: state.balance });
 
 const mapDispatchToProps = (dispatch) => ({
-    depositAction: () => dispatch(deposit()),
-    withdrawAction: () => dispatch(withdraw())
+    depositAction: () => dispatch({
+        type: 'DEPOSIT',
+        value: 10,
+    }),
+    withdrawAction: () => dispatch({
+        type: 'WITHDRAW',
+        value: 10,
+    })
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Account);`}
@@ -314,15 +324,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(Account);`}
                 </div>
                 <div style={{ maxWidth: '250px' }}>
                     <p>=></p>
-                    <i style={{ fontSize: '25px' }}>dispatch(deposit())</i>
+                    <i style={{ fontSize: '25px' }}>dispatch()</i>
                 </div>
                 <div>
                     <Title>Action</Title>
                     <Code className={s.codeSmall}>
-                        {`export const deposit = () => ({
+                        {`export const deposit = {
     type: 'DEPOSIT',
     value: 10,
-});`}
+};`}
                     </Code>
                 </div>
             </div>
@@ -335,10 +345,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(Account);`}
                 <div>
                     <Title>Action</Title>
                     <Code className={s.codeSmall}>
-                        {`export const deposit = () => ({
+                        {`export const deposit = {
     type: 'DEPOSIT',
     value: 10,
-});`}
+};`}
                     </Code>
                 </div>
                 <div style={{ maxWidth: '250px' }}>
@@ -367,7 +377,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Account);`}
                     <Title size="page">State</Title>
                     <Code>
                         {`{
-    account: 10,
+    balance: 10,
 }`}
                     </Code>
                 </div>
@@ -382,7 +392,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Account);`}
                     <Title size="page">State</Title>
                     <Code>
                         {`{
-    account: 10,
+    balance: 10,
 }`}
                     </Code>
                 </div>
@@ -393,7 +403,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Account);`}
                 <div>
                     <Title size="page">Container</Title>
                     <Code className={s.codeSmall}>
-                        {`const mapStateToProps = (state, ownProps) => ({ balance: state.account});
+                        {`const mapStateToProps = (state, ownProps) => ({ balance: state.balance });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Account);`}
                     </Code>
@@ -440,7 +450,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Account);`}
             <div>
                 <p>A middleware provides an extension point</p><p>between dispatching an action, and the moment it reaches the reducer.</p>
                 <img src={reduxMiddlewares} width={"100%"} />
-                <p>It returns an action</p>
+                <p>It passes an action to the next middleware</p>
             </div>
         )
     },
@@ -458,7 +468,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(Account);`}
         content: (
             <div>
                 <Title size="display">Side Effects</Title>
-                <Title size="page">We have to go deeper</Title>
             </div>
         )
     },
@@ -485,9 +494,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(Account);`}
                 </div>
                 <div>
                     <Code>
-                        {`const requestCat = () => ({
+                        {`const requestCat = {
     type: 'FETCH_CAT_REQUEST',
-})`}
+}`}
                     </Code>
                     <Code>
                         {`const receiveCat = cat => ({
@@ -541,35 +550,25 @@ switch (action.type) {
         content: (
             <div className={s.sideBySide}>
                 <Code className={s.codeSmall}>
-                    {`class AccountContainer extends Component {
-    render() {
-        return (
-            <div>
-                <CatDisplayer
-                   cats={this.props.cats}
-                   getCat={() => this.props.getCatAction()}
-                   isFetching={this.props.isFetching}
-                />
-            </div>
-        );
-    }
-}
-const mapStateToProps = (state, ownProps) => ({
+                    {`const mapStateToProps = (state, ownProps) => ({
     cats: state.cats.images,
-    isFetching: state.cats.isFetching,
+    isFetchingCat: state.cats.isFetching,
 });
+
 const mapDispatchToProps = (dispatch) => ({
     getCatAction: () => dispatch(getCat()),
-});`}
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CatDisplayer);`}
                 </Code>
                 <Code className={s.codeSmall}>
-                    {`const CatDisplayer = ({ cats, isFetching, getCat }) => (
+                    {`const CatDisplayer = ({ cats, isFetching, getCatAction }) => (
     <div>
         <div className={s.cats}>
             {cats.map(cat => <img key={cat} src={\`http://localhost:1212\${cat}\`} />)}
         </div>
         {isFetching && <Loader />}
-        <button onClick={getCat}>Get cat!</button>
+        <button onClick={getCatAction}>Get cat!</button>
     </div>
 );`}
                 </Code>

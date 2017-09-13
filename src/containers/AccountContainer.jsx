@@ -4,7 +4,7 @@ import { deposit, withdraw } from '../actions/account';
 
 import Account from '../components/Account';
 
-const mapStateToProps = (state, ownProps) => ({ balance: state.account});
+const mapStateToProps = (state, ownProps) => ({ balance: state.balance});
 
 const mapDispatchToProps = (dispatch) => ({
     depositAction: () => dispatch(deposit()),

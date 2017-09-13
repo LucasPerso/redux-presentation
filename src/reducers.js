@@ -21,7 +21,7 @@ const slides = (state = initialState, action) => {
     }
 };
 
-const account = (state = 0, action) => {
+const balance = (state = 0, action) => {
     switch (action.type) {
         case 'DEPOSIT':
             return state + action.value;
@@ -57,7 +57,7 @@ const cats = (state = { images: [], isFetching: false }, action) => {
 };
 
 export default {
-    account,
+    balance,
     cats,
     slides,
 };

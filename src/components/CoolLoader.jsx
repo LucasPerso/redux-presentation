@@ -1,5 +1,5 @@
 export default () => (
-    <svg width="200px" height="200px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+    <svg width="800px" height="800px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
         <g transform="rotate(90.8425 50 50)">
             <animateTransform attributeName="transform" type="rotate" values="360 50 50;0 50 50" keyTimes="0;1" dur="1s" repeatCount="indefinite" calcMode="spline" keySplines="0.5 0 0.5 1" begin="-0.1s"></animateTransform>
             <circle cx="50" cy="50" r="39.891" stroke="#fdd032" strokeWidth="14.4" fill="none" strokeDasharray="0 300">

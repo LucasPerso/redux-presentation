@@ -5,7 +5,7 @@ export const deposit = () => ({
 
 export const withdraw = () => ({
     type: 'WITHDRAW',
-    value: 5,
+    value: 10,
 });
 
 const requestCat = () => ({
